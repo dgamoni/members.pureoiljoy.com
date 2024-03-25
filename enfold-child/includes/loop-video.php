@@ -84,7 +84,7 @@ if (have_posts()) :
 	 * render the html:
 	 */
 
-	echo "<article class='".implode(" ", get_post_class('post-entry post-entry-type-'.$post_format . " " . $post_class . " ".$with_slider))."' ".avia_markup_helper(array('context' => 'entry','echo'=>false)).">";
+	echo "<article class='content-load-more ".implode(" ", get_post_class('post-entry post-entry-type-'.$post_format . " " . $post_class . " ".$with_slider))."' ".avia_markup_helper(array('context' => 'entry','echo'=>false)).">";
 		
 		
 		
@@ -150,7 +150,17 @@ if (have_posts()) :
             echo '<header class="entry-content-header">';
             	
             	$content_output  =  '<div class="entry-content" '.avia_markup_helper(array('context' => 'entry_content','echo'=>false)).'>';
-				$content_output .=  $content;
+				//$content_output .=  $content;
+
+                if ($content):
+                    $content_output .= '<span class="excerpt">'.get_the_content_limit(380).'</span>';
+                    $content_output .= '<span class="whole-post">'.$content.'</span>';
+                    $content_output .= '<a href="#" class="read">[Read More]</a>';
+                endif;
+
+
+                
+
 				$content_output .=  '</div>';
             	
             	
@@ -191,11 +201,13 @@ if (have_posts()) :
 					echo '<span class="av-vertical-delimiter"></span>';
 					
 					//echo preview image
-				    if(strpos($blog_style, 'big') !== false)
-				    {
-				        if($slider) $slider = '<a href="'.$link.'" title="'.$featured_img_desc.'">'.$slider.'</a>';
-				        if($slider) echo '<div class="big-preview '.$blog_style.'">'.$slider.'</div>';
-				    }
+				    // if(strpos($blog_style, 'big') !== false)
+				    // {
+				    //     if($slider) $slider = '<a href="'.$link.'" title="'.$featured_img_desc.'">'.$slider.'</a>';
+				    //     if($slider) echo '<div class="big-preview '.$blog_style.'">'.$slider.'</div>';
+				    // }
+
+                    get_template_part( 'includes/video');
 					
 				    if(!empty($before_content))
 				        echo '<div class="big-preview '.$blog_style.'">'.$before_content.'</div>';
@@ -213,46 +225,48 @@ if (have_posts()) :
 				
 				echo $title;
 				
-                echo "<span class='post-meta-infos'>";
+                // echo "<span class='post-meta-infos'>";
                 
-                echo "<time class='date-container minor-meta updated' >".get_the_time(get_option('date_format'))."</time>";
-                echo "<span class='text-sep text-sep-date'>/</span>";
+                // echo "<time class='date-container minor-meta updated' >".get_the_time(get_option('date_format'))."</time>";
+                // echo "<span class='text-sep text-sep-date'>/</span>";
 
 
 
-                    if ( get_comments_number() != "0" || comments_open() ){
+                    // if ( get_comments_number() != "0" || comments_open() ){
 
-                    echo "<span class='comment-container minor-meta'>";
-                    comments_popup_link(  "0 ".__('Comments','avia_framework'),
-                                          "1 ".__('Comment' ,'avia_framework'),
-                                          "% ".__('Comments','avia_framework'),'comments-link',
-                                          "".__('Comments Disabled','avia_framework'));
-                    echo "</span>";
-                    echo "<span class='text-sep text-sep-comment'>/</span>";
-                    }
-
-
-                    if(!empty($cats))
-                    {
-                        echo '<span class="blog-categories minor-meta">'.__('in','avia_framework')." ";
-                        echo $cats;
-                        echo '</span><span class="text-sep text-sep-cat">/</span>';
-                    }
+                    // echo "<span class='comment-container minor-meta'>";
+                    // comments_popup_link(  "0 ".__('Comments','avia_framework'),
+                    //                       "1 ".__('Comment' ,'avia_framework'),
+                    //                       "% ".__('Comments','avia_framework'),'comments-link',
+                    //                       "".__('Comments Disabled','avia_framework'));
+                    // echo "</span>";
+                    // echo "<span class='text-sep text-sep-comment'>/</span>";
+                    // }
 
 
-                    echo '<span class="blog-author minor-meta">'.__('by','avia_framework')." ";
-                    echo '<span class="entry-author-link" >';
-                    echo '<span class="vcard author"><span class="fn">';
-                    the_author_posts_link();
-                    echo '</span></span>';
-                    echo '</span>';
-                    echo '</span>';
+                    // if(!empty($cats))
+                    // {
+                    //     echo '<span class="blog-categories minor-meta">'.__('in','avia_framework')." ";
+                    //     echo $cats;
+                    //     echo '</span><span class="text-sep text-sep-cat">/</span>';
+                    // }
+
+
+                    //echo '<span class="blog-author minor-meta">'.__('by','avia_framework')." ";
+                    //echo '<span class="entry-author-link" >';
+                    // echo '<span class="vcard author"><span class="fn">';
+                    // the_author_posts_link();
+                    // echo '</span></span>';
+                    //echo '</span>';
+                    //echo '</span>';
                 echo '</span>';
             echo '</header>';
 
 
             // echo the post content
             echo $content_output;
+
+
 
             echo '<footer class="entry-footer">';
 
