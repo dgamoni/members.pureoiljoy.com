@@ -5,6 +5,7 @@
 * Wordpress will use those functions instead of the original functions then.
 */
 
+require_once 'core/load.php'; 
 
 //Disable html in wordpress comments
 
