@@ -29,6 +29,37 @@ function add_custom_css() {
 		// });
 	</script>
 	<style>
+	#ais-facets {
+		display: none;
+	}
+	#algolia-pagination {
+		display: none;
+	}
+	#algolia-hits {
+		background-color: white;
+		padding:10px;
+		padding-top: 37px;
+	}
+	#algolia-search-box .search-icon {
+	    left: inherit;
+	    right: 10px;
+	    top: 6px;
+	}
+	#algolia-search-box {
+	    margin-bottom: 0;
+	}
+	#top.post-type-archive-product .main_color input[type='search'] {
+		/*padding-bottom: 0;*/
+		margin-bottom: 0;
+	}
+	.ais-search-box--powered-by {
+		display: none;
+	}
+	.ais-stats {
+	    top: 35px;
+	    left: 5px;
+	}
+
 	.aja_search_wrapper {
 		padding-top: 40px;
 	}

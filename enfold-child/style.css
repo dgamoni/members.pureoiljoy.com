@@ -1070,7 +1070,7 @@ transform: scale(1.3);
 .custom-wrap-section-content .custom_section11_image1-1 p {font-size: 50px !important;}
 .custom-lets-make-world-section p {line-height: 57px !important;}
 .av_textblock_section .custom_realpure_business {font-size: 65px;}
-#custom-lets-section .avia-builder-el-99 {padding: 0 !important;}
+#custom-lets-section .avia-builder-el-99 {padding: 0 !important;}                                                 nnnnnnnnnnnnnnnnm
 
 }
 
@@ -1096,4 +1096,25 @@ padding: 0;
 }
 .custom-bottom-sec .flex_column.av_three_fifth.flex_column_div.av-zero-column-padding.first.avia-builder-el-119.el_before_av_two_fifth.avia-builder-el-first {
     padding: 10px;
+}
+
+
+div .product .posted_in {
+    display: block;
+    margin-bottom: 15px;
+}
+
+div .product .posted_in a {
+    color: #fff;
+    background-color: #2997ab;
+    border-color: transparent;
+    border-radius: 100px;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 0 15px;
+    font-size: 10px;
+}
+.woocommerce-loop-product__title + div{
+    line-height: 1.1!important;
+    font-size: 0.8em!important;
 }
