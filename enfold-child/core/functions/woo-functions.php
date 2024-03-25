@@ -24,12 +24,11 @@ function include_ajaxseach()
 
 
 add_action('wp_enqueue_scripts', function () {
-    if (is_shop()):
+    if (is_shop() || is_product_category()):
         wp_enqueue_style('algolia-instantsearch');
         wp_enqueue_script('algolia-instantsearch');
     endif;
 });
-
 
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
 add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 6 );
@@ -43,7 +42,7 @@ function avia_add_description() {
     $excerpt = strip_tags($excerpt);
     $excerpt = substr($excerpt, 0, 80);
     $excerpt = substr($excerpt, 0, strripos($excerpt, " "));
-    $excerpt = trim(preg_replace( '/s+/', ' ', $excerpt));
+    //$excerpt = trim(preg_replace( '/s+/', ' ', $excerpt));
     $excerpt = $excerpt.'...';
     ?>
     <div itemprop="description" style="line-height: 1.1;font-size: 0.9em">
@@ -52,25 +51,55 @@ function avia_add_description() {
     <?php
 }
 
+//add_action('woocommerce_before_main_content', 'include_instaseach_pre', 14);
+function include_instaseach_pre() {
+    echo '
+    <div class="instaseach_pre">
+        <p class="instaseach_pre_header">INTERACTIVE SEARCH ENGINE</p>
+        <div class="instaseach_pre_text">
+            <span class="instaseach_pre_header">Fill in an interest, health issue, or body system.</span><br>
+            <span>Hit Enter, and watch your website find the categories of oils to fit your needs.</span>
+        </div>
+    </div>
+    ';
+}
+
 add_action('woocommerce_before_main_content', 'include_instaseach', 15);
 function include_instaseach()
 {
-    if (!is_shop()){
+    if ( is_product() ){
         return;
     }
     ?>
+
     <div id="ais-wrapper">
         <main id="ais-main">
-            <div id="algolia-search-box">
-                <div id="algolia-stats"></div>
-                <svg class="search-icon" width="25" height="25" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M24.828 31.657a16.76 16.76 0 0 1-7.992 2.015C7.538 33.672 0 26.134 0 16.836 0 7.538 7.538 0 16.836 0c9.298 0 16.836 7.538 16.836 16.836 0 3.22-.905 6.23-2.475 8.79.288.18.56.395.81.645l5.985 5.986A4.54 4.54 0 0 1 38 38.673a4.535 4.535 0 0 1-6.417-.007l-5.986-5.986a4.545 4.545 0 0 1-.77-1.023zm-7.992-4.046c5.95 0 10.775-4.823 10.775-10.774 0-5.95-4.823-10.775-10.774-10.775-5.95 0-10.775 4.825-10.775 10.776 0 5.95 4.825 10.775 10.776 10.775z"
-                          fill-rule="evenodd"></path>
-                </svg>
+
+            <div id="search-box-left">
+                <p class="instaseach_pre_header">INTERACTIVE SEARCH ENGINE</p>
             </div>
+            <div id="search-box-right">
+                <div class="instaseach_pre_text">
+                    <span class="instaseach_pre_header2">Fill in an interest, health issue, or body system.</span><br>
+                    <span class="instaseach_pre_header3">Hit Enter, and watch your website find the categories of oils to fit your needs.</span>
+                </div>
+                <div id="algolia-search-box">
+                    <div id="algolia-stats"></div>
+                    <svg class="search-icon" width="25" height="25" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M24.828 31.657a16.76 16.76 0 0 1-7.992 2.015C7.538 33.672 0 26.134 0 16.836 0 7.538 7.538 0 16.836 0c9.298 0 16.836 7.538 16.836 16.836 0 3.22-.905 6.23-2.475 8.79.288.18.56.395.81.645l5.985 5.986A4.54 4.54 0 0 1 38 38.673a4.535 4.535 0 0 1-6.417-.007l-5.986-5.986a4.545 4.545 0 0 1-.77-1.023zm-7.992-4.046c5.95 0 10.775-4.823 10.775-10.774 0-5.95-4.823-10.775-10.774-10.775-5.95 0-10.775 4.825-10.775 10.776 0 5.95 4.825 10.775 10.776 10.775z"
+                              fill-rule="evenodd"></path>
+                    </svg>
+                </div>
+
+            </div>
+            <div class="ais-clearfix"></div>
+	        <?php //do_action( 'woocommerce_archive_description' ); ?>
             <div id="algolia-hits"></div>
             <div id="algolia-pagination"></div>
         </main>
+        <div class="instaseach_descript">
+            The following products help promote and maintain better health. These statements have not been evaluated by the Food and Drug Administration. These products are not intended to diagnose, treat, cure, or prevent any disease.
+        </div>
         <aside id="ais-facets">
             <section class="ais-facets" id="facet-post-types"></section>
             <section class="ais-facets" id="facet-categories"></section>
